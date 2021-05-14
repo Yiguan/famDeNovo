@@ -1,7 +1,12 @@
 
+---
+
 Filter VCF file to identify germline de novo mutations.
 
 The VCF should contain a mother, a father and their multiple offspring.
+
+Assuming: X/Y diploid orgnism; VCF only has SNPs (no INDELs).
+
 
 For a de novo mutation:
 	
@@ -9,7 +14,7 @@ For a de novo mutation:
 	
 - The denovo in the child should have supporing reads for both forward and reverse strans(ADF>0, ADR>0).
 
-- The child with denovo should meet  `--allele-balance`, `--min-dp`, `--max-dp`, `--min-gq`. (for male X, depth halved and not check allelic balance).	
+- The child with denovo should meet  `--allele-balance`, `--min-dp`, `--max-dp`, `--min-gq`. (for male X, DP and GQ halved and not check allelic balance).	
 
 - The parents are both homozygous reference(0/0), no reads contain the mutation allele(AD alt = 0);
 

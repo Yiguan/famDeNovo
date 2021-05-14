@@ -85,7 +85,13 @@ bool INDI::DPmatch(int minDP, int maxDP)
 
 bool INDI::GQmatch(int minGQ)
 {
-	return (GQ>=minGQ)?true:false;
+	if(SEX=="1" && CHROM=="X") 
+	{
+		return (GQ>=minGQ/2.0)?true:false;
+	}else
+	{
+		return (GQ>=minGQ)?true:false;
+	}
 }
 
 bool INDI::AB_ADF_ADRmatch(int ith_ALT, double AB_thres)

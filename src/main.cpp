@@ -1,5 +1,5 @@
 // Assume X as sexual chromosome,
-// Filtering: male X depth = 1/2 autosome depth 
+// Filtering: male X depth = 1/2 autosome depth, genotype quality = 1/2 autosome GQ 
 // Assume diploid
 
 
