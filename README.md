@@ -5,19 +5,19 @@ The VCF should contain a mother, a father and their multiple offspring.
 
 For a de novo mutation:
 	
-	The child with denovo should be heterozygous(0/1) for autosomes and homozygous reference(1/1) for male X.
+- The child with denovo should be heterozygous(0/1) for autosomes and homozygous reference(1/1) for male X.
 	
-	The denovo in the child should have supporing reads for both forward and reverse strans(ADF>0, ADR>0).
+- The denovo in the child should have supporing reads for both forward and reverse strans(ADF>0, ADR>0).
 
-	The child with denovo should meet  `--allele-balance`, `--min-dp`, `--max-dp`, `--min-gq`. (for male X, depth halved and not check allelic balance).	
+- The child with denovo should meet  `--allele-balance`, `--min-dp`, `--max-dp`, `--min-gq`. (for male X, depth halved and not check allelic balance).	
 
-	The parents are both homozygous reference(0/0), no reads contain the mutation allele(AD alt = 0);
+- The parents are both homozygous reference(0/0), no reads contain the mutation allele(AD alt = 0);
 
-	The parents shoule meet  `--min-dp`, `--max-dp`, `--min-gq`.
+- The parents shoule meet  `--min-dp`, `--max-dp`, `--min-gq`.
 	
-	The denovo should not appear in other offspring genotype.
+- The denovo should not appear in other offspring genotype.
 
-	The number of impurity samples should no greater than `--max-impurity-sample`. The impurity sample defined as other offspring samples(not the denovo offspring)
+- The number of impurity samples should no greater than `--max-impurity-sample`. The impurity sample defined as other offspring samples(not the denovo offspring)
 whose number of reads supporting the denovo larger than or equal `--ad-min-impurity` 
 
 
