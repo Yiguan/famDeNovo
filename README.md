@@ -14,7 +14,7 @@ For a de novo mutation:
 	
 - The denovo in the child should have supporing reads for both forward and reverse strans(ADF>0, ADR>0).
 
-- The child with denovo should meet  `--allele-balance`, `--min-dp`, `--max-dp`, `--min-gq`. (for male X, DP and GQ halved and not check allelic balance).	
+- The child with denovo should meet `--min-alt`, `--allele-balance`, `--min-dp`, `--max-dp`, `--min-gq`. (for male X, DP and GQ halved and not check allelic balance).	
 
 - The parents are both homozygous reference(0/0), no reads contain the mutation allele(AD alt = 0);
 
@@ -69,6 +69,7 @@ Options:
         --min-dp              The minimum read depth. int [0,Inf); default 10
         --max-dp              The maximum read depth. int [0,Inf); default 150
         --min-gq              The minimum genotype quality. int [0,Inf); default 70
+	--min-alt	      The minimum number of ALT reads to be a denovo; int [0, Inf);default 5
         --allele-balance      The allele balance for a heterozygote
                                 allele balance less than this value or larger than 1-this value
                                 will be filtered out. double [0,0.5); default 0.15

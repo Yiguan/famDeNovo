@@ -19,6 +19,7 @@
 //#define MAX_DP  150
 //#define MIN_GQ  70
 //#define AB_T    0.15
+//#define MIN_ALT 5
 //#define AD_MIN_IMPURITY  1 
 // integer [1, Inf]
 //#define MAX_IMPURITY_SAMPLE  0 
@@ -36,6 +37,7 @@ std::string outfile;
 int 	MIN_DP  = 10;
 int 	MAX_DP = 150;
 int 	MIN_GQ = 70;
+int	MIN_ALT = 5;
 double  AB_T = 0.15;
 int 	AD_MIN_IMPURITY = 1;
 int 	MAX_IMPURITY_SAMPLE = 0;
@@ -51,6 +53,7 @@ void show_usage(std::string name)
 		  << "\t--min-dp              The minimum read depth. int [0,Inf); default 10\n"
 		  << "\t--max-dp              The maximum read depth. int [0,Inf); default 150\n"
 		  << "\t--min-gq              The minimum genotype quality. int [0,Inf); default 70\n"
+		  << "\t--min-alt	      The minimum number of ALT reads to be a denovo; int [0, Inf);default 5\n"
 		  << "\t--allele-balance      The allele balance for a heterozygote\n"
 		  << "\t                        allele balance less than this value or larger than 1-this value\n"
 		  << "\t                        will be filtered out. double [0,0.5); default 0.15\n"
@@ -79,6 +82,7 @@ int main(int argc, char * argv[])
 		else if(arg=="--min-dp"){MIN_DP=std::stoi(argv[h+1]);}
 		else if(arg=="--max-dp"){MAX_DP=std::stoi(argv[h+1]);}
 		else if(arg=="--min-gq"){MIN_GQ=std::stoi(argv[h+1]);}
+		else if(arg=="--min-alt"){MIN_ALT=std::stoi(argv[h+1]);}
 		else if(arg=="--allele-balance"){AB_T=std::stod(argv[h+1]);}
 		else if(arg=="--ad-min-impurity"){AD_MIN_IMPURITY=std::stoi(argv[h+1]);}
 		else if(arg=="--max-impurity-sample"){MAX_IMPURITY_SAMPLE=std::stoi(argv[h+1]);}
@@ -92,6 +96,7 @@ int main(int argc, char * argv[])
 		  << "     --min-dp               " << MIN_DP << "\n"
 		  << "     --max-dp               " << MAX_DP << "\n"
 		  << "     --min-gq               " << MIN_GQ << "\n"
+		  << "     --min-alt	  	  " << MIN_ALT << "\n"
 	   	  << "     --allele-balance       " << AB_T << "\n"
 		  << "     --ad-min-impurity      " << AD_MIN_IMPURITY << "\n"
 		  << "     --max-impurity-sample  " << MAX_IMPURITY_SAMPLE << std::endl;
@@ -228,7 +233,7 @@ int testAlt(std::vector<INDI> & ssvv, int ith_alt) //ith_alt starts from 1
 	if(altHetSampleIndex.size()!=1) return -1;
 	// std::cout << "Unique mutation filtering PASS" << std::endl;
 	int sid = altHetSampleIndex[0];
-	if(!(ssvv[sid].DPmatch(MIN_DP, MAX_DP) && ssvv[sid].GQmatch(MIN_GQ) && ssvv[sid].AB_ADF_ADRmatch(ith_alt, AB_T))) return -1;
+	if(!(ssvv[sid].DPmatch(MIN_DP, MAX_DP) && ssvv[sid].GQmatch(MIN_GQ) && ssvv[sid].AB_ADF_ADRmatch(ith_alt, AB_T) && ssvv[sid].AD[ith_alt]>=MIN_ALT)) return -1;
 	// std::cout << "Child filtering PASS" << std::endl;
 	// check impurity samples
 	int impurity_sample = 0;
